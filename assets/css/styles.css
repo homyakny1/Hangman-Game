@@ -1,0 +1,59 @@
+body {
+    background: url("https://www.toptal.com/designers/subtlepatterns/patterns/low_contrast_linen.png");
+}
+
+#hangman-top {
+    margin-top: -50px;
+    margin-left: -50px;
+}
+
+#movie-ed {
+    position: absolute;
+    width: 800px;
+    top: 180px;
+    left: -20px;
+}
+
+video#bgVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    min-width: 100%;
+    height: auto;
+    min-height: 100%;
+    z-index: -100;
+    background-size: cover;
+}
+
+#guessingWord {
+    margin: 30px;
+    border-radius: 25px;
+    font-size: 50px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.507);;
+}
+
+#guessedLetters {
+    margin: 30px;
+    border-radius: 25px;
+    font-size: 50px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.507);;
+}
+#states{
+    margin: 30px;
+    border-radius: 25px;
+    font-size: 50px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.507);
+}
+
+#gameStatus{
+    margin: 10px;
+    border-radius: 25px;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.507);
+}

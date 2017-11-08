@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="assets/images/hang.png" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<title>HANGMAM GAME</title>
+	<link rel="stylesheet " type="text/css" href="assets/css/styles.css">
+</head>
+
+<body>
+	<!-- Video Background -->
+	<video id="bgVideo" autoplay loop muted width="100%">
+		<source src="assets/images/videoplayback.mp4" type="video/mp4" />
+		<source src="assets/images/videoplayback.webm" type="video/webm" />
+	</video>
+	<!-- Container -->
+	<div class="container">
+		<!-- Header -->
+		<div class="row"></div>
+		<div class="col-md-8 col-md-offset-2">
+			<img class="center-block" class="img-responsive" id="hangman-top" src="assets/images/hangman_top.png" alt="Hangman">
+			<img id="movie-ed" src="assets/images/movie-edition.png" alt="Movie Edition">
+		</div>
+		<!-- Word panel -->
+		<div class="row">
+			<div class="col-md-12">
+				<div id="guessingWord">Word will be shown here</div>
+			</div>
+		</div>
+		<!-- Game State -->
+		<div class="row">
+			<div class="col-md-6">
+				<div id="guessedLetters">Geussed letters</div>
+			</div>
+			<div class="col-md-6">
+				<div class="row" id="states">
+					<div class="col-sm-12">
+						<div>Tries Left:
+							<span id="triesLeft"></span>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div>Wins:
+							<span id="wins"></span>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div>Losses:
+							<span id="losses"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" class="status">
+			<div class="col-md-12">
+				<div>
+					<span class="center-block" id="gameStatus">Press <b>ENTER</b> key to start the game!</span>
+				</div>
+			</div>
+		</div>
+	<script type="text/javascript" src="assets/javascript/game.js"></script>
+</body>
+
+</html>
