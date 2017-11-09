@@ -1,26 +1,47 @@
 var words = ["avatar","titanic","star wars","avengers","transformers","skyfall","terminator","armageddon","superbad","it"];
 
-var randomWord = words[Math.floor(Math.random()*words.length)];
-var placeHolder = "";
-var totalWins = 0;
-var totalLosses = 0;
-var guessesRemaining = 12;
+var choosenWord = words[Math.floor(Math.random()*words.length)];
+var underScore = [];
+var rightWord = [];
+var wrongWord = [];
+var guessesLeft = 12;
 
-document.addEventListener('keyup', function (event) {
-    if (event.which === 13) {
-      beginGame();
-    }
-  });
+var docUnderScore = document.getElementById("guessingWord")
 
-function beginGame() {
-    for(var i = 0; i < randomWord.length; i++)
-    {
-        placeHolder += "_ ";
+console.log(choosenWord);
+
+var generateUnderscore = function(){
+    for(var i=0; i<choosenWord.length; i++){
+        underScore.push('_ ');
     }
-    document.getElementById("guessingWord").innerHTML = placeHolder;
-    document.getElementById("wins").innerHTML = totalWins;
-    document.getElementById("losses").innerHTML = totalLosses;
-    document.getElementById("triesLeft").innerHTML = guessesRemaining;
-    document.getElementById("gameStatus").innerHTML = "You have successfully started the game, good luck!";
-    document.getElementById("guessedLetters").innerHTML = key.event;
+    return underScore;
 };
+
+console.log(generateUnderscore());
+
+document.addEventListener('keyup', (event) =>{
+
+    var keyword = String.fromCharCode(event.keyCode).toLocaleLowerCase();
+    console.log(letter);
+    var letter = choosenWord.indexOf(keyword);
+
+    if(letter > -1){
+        rightWord.push(keyword);
+        underScore [letter] = keyword;
+        console.log(rightWord);
+        if (underScore.join("") == choosenWord){
+            alert("You are correct it's " + choosenWord);
+
+        }
+    }
+    else{
+        wrongWord.push(keyword);
+        guessesLeft -=1;
+        console.log(wrongWord);
+
+    }
+
+    document.getElementById("guessingWord").innerHTML = generateUnderscore();
+    document.getElementById("triesLeft").innerHTML = guessesLeft;
+    document.getElementById("guessedLetters").innerHTML = wrongWord;
+});
