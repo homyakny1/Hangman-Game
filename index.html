@@ -11,6 +11,7 @@
 </head>
 
 <body>
+	
 	<!-- Video Background -->
 	<video id="bgVideo" autoplay loop muted width="100%">
 		<source src="assets/images/videoplayback.mp4" type="video/mp4" />
@@ -58,9 +59,18 @@
 		<div class="row" class="status">
 			<div class="col-md-12">
 				<div>
-					<span class="center-block" id="gameStatus">Press <b>ENTER</b> key to start the game!</span>
+					<span class="center-block" id="gameStatus"></span>
 				</div>
 			</div>
+			<div class="dancer" style="display:none">
+			<img src="https://i.pinimg.com/originals/86/a8/ff/86a8ff5c9255aad1ef5acd3efce00e8a.gif"style="position:absolute; top:300px; left:600px;">
+		</div>
+		<audio id="youWinSound">
+            <source src="assets/images/you_win.wav" type="audio/wav">
+		</audio>
+		<audio id="youLoseSound">
+            <source src="assets/images/you_lose.wav" type="audio/wav">
+        </audio>
 		</div>
 	<script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>

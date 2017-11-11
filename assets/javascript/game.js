@@ -1,47 +1,120 @@
-var words = ["avatar","titanic","star wars","avengers","transformers","skyfall","terminator","armageddon","superbad","it"];
+var words = ["avatar", "titanic", "starwars", "avengers", "transformers", "skyfall", "terminator", "armageddon", "superbad", "it", "matrix"];
 
-var choosenWord = words[Math.floor(Math.random()*words.length)];
-var underScore = [];
-var rightWord = [];
-var wrongWord = [];
-var guessesLeft = 12;
+var choosenWord = "";
+var triesLeft = 12;
+var wins = 0;
+var losses = 0;
+var guessingWord = [];
+var wrongLetters = [];
+var image = document.getElementById("dancer");
 
-var docUnderScore = document.getElementById("guessingWord")
+function newGame() {
 
-console.log(choosenWord);
+    choosenWord = words[Math.floor(Math.random() * words.length)];
+    triesLeft = 12;
+    choosenWord;
+    guessingWord = [];
+    wrongLetters = [];
+    // document.getElementById("dancer").style.visibility = 'hidden';
 
-var generateUnderscore = function(){
-    for(var i=0; i<choosenWord.length; i++){
-        underScore.push('_ ');
+
+    for (i = 0; i < choosenWord.length; i++) {
+        guessingWord[i] = "_";
     }
-    return underScore;
+
+    document.getElementById("guessingWord").innerHTML = guessingWord.join(" ");
+
+    document.getElementById("triesLeft").innerHTML = triesLeft;
+
+    document.getElementById("guessedLetters").innerHTML = "Wrong letters will be shown here";
+
+    document.getElementById("wins").innerHTML = wins;
+
+    document.getElementById("losses").innerHTML = losses;
+
+    document.getElementById("gameStatus").innerHTML = "<b>Press any key to start the game!</b>";
+}
+
+
+function evaluateGuess(anyLetter, letterCode) {
+    document.getElementById("gameStatus").innerHTML = "You have successfully started the game, good luck!";
+
+    var guessLetterInWord = false;
+
+    if ((letterCode <= 64) || (letterCode >= 91)) {
+        var keyIsALetter = false;
+        alert("This isn't MATH game!!!");
+    } else if (anyLetter.length > 1) {
+        alert("Don't you know? You should use letters in this game!");
+    } else if (anyLetter.length === 1) {
+        for (j = 0; j < guessingWord.length; j++) {
+            if (choosenWord[j] === anyLetter) {
+                guessingWord[j] = anyLetter;
+                guessLetterInWord = true;
+            }
+        }
+
+        document.getElementById("guessingWord").innerHTML = guessingWord.join(" ");
+    }
+
+
+    if ((guessLetterInWord === false) && (wrongLetters.indexOf(anyLetter) === -1)) {
+        wrongLetters.push(anyLetter.toUpperCase());
+        triesLeft--;
+        document.getElementById("guessedLetters").innerHTML = wrongLetters.join(" ");
+        document.getElementById("triesLeft").innerHTML = triesLeft;
+    }
 };
 
-console.log(generateUnderscore());
 
-document.addEventListener('keyup', (event) =>{
+function tallyScores() {
 
-    var keyword = String.fromCharCode(event.keyCode).toLocaleLowerCase();
-    console.log(letter);
-    var letter = choosenWord.indexOf(keyword);
+    var image = document.getElementById("dancer");
+    var youWinSound = document.getElementById("youWinSound");
+    var youLoseSound = document.getElementById("youLoseSound");
+    console.log(choosenWord);
+    console.log(guessingWord.join(""));
+    
 
-    if(letter > -1){
-        rightWord.push(keyword);
-        underScore [letter] = keyword;
-        console.log(rightWord);
-        if (underScore.join("") == choosenWord){
-            alert("You are correct it's " + choosenWord);
 
-        }
+    if (choosenWord === guessingWord.join("")) {
+        
+        wins++;
+        function displayImage() {
+            image.style.display = "block";
+            }
+        youWinSound.play();
+        document.getElementById("wins").innerHTML = wins;
+        document.getElementById("losses").innerHTML = losses;
+        document.getElementById("gameStatus").innerHTML = "WOW!!! You won!!! Wait 3 Seconds!";
+        
+        setTimeout(function () {
+            newGame();
+        }, 3000);
+
+    } else if (triesLeft === 0) {
+        losses++;
+        youLoseSound.play();
+        document.getElementById("wins").innerHTML = wins;
+        document.getElementById("losses").innerHTML = losses;
+        document.getElementById("gameStatus").innerHTML = "Noooooo!!!!  It was " + choosenWord + ". Want more!? Wait 3 Seconds!";
+        setTimeout(function () {
+            newGame();
+        }, 3000);
     }
-    else{
-        wrongWord.push(keyword);
-        guessesLeft -=1;
-        console.log(wrongWord);
 
-    }
+};
 
-    document.getElementById("guessingWord").innerHTML = generateUnderscore();
-    document.getElementById("triesLeft").innerHTML = guessesLeft;
-    document.getElementById("guessedLetters").innerHTML = wrongWord;
-});
+newGame();
+
+document.onkeyup = function (event) {
+    
+
+    var guessCode = event.keycode;
+    var guessLetter = event.key.toLowerCase();
+
+    evaluateGuess(guessLetter, guessCode);
+
+    tallyScores();
+
+};
