@@ -60,3 +60,8 @@ video#bgVideo {
 b{
     color:red;
 }
+#dancergif{
+    position:absolute;
+    top: 40%;
+    left: 40%;
+}
